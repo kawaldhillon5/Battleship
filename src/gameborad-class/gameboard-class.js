@@ -13,38 +13,41 @@ class GameBoard {
         this.board = array_outside;
     }
 
-    checkUseability = function([x,y], ship_length, horizontal_direction){
+    #checkUseability([x,y], ship_length, horizontal_direction){
 
         if(horizontal_direction){
-            for(let i = x; i < ship_length; i++){
+            for(let i = x; i < x+ ship_length; i++){
                 if(this.board[i][y].is_useable === false) return false;
             }
             return true
             }  else {
-            for(let i = y; i < ship_length; i++){
+            for(let i = y; i < y +   ship_length; i++){
                 if(this.board[x][i].is_useable === false) return false;
             }  
             return true
             }
     }
 
-    placeShip = function([x,y], ship_length, horizontal_direction){
+    placeShip = function([x,y], ship, horizontal_direction){
+
+        const ship_length = ship.length;
 
         if(((x > 9) || ( y > 9) || ((x + (ship_length -1)) > 9) || ( (y + (ship_length - 1)) > 9))){
             return false;
         }
 
         
-        if(this.checkUseability([x,y],ship_length,horizontal_direction)){
+        if(this.#checkUseability([x,y],ship_length,horizontal_direction)){
             if(horizontal_direction){
                 for(let j = y - 1; j <= y + 1; j++){
                     for(let i = x - 1; i < x + ship_length + 1; i++){
                         if((i >= 0) && (i <= 9) && (j >=0) && (j <= 9)){
                             this.board[i][j].changeUseability();
                         }
-                        if(j === y) {
+                        if(j === y)  {
                             if((i >= x) && (i < (x + ship_length))){
                                 this.board[i][y].addShip();
+                                ship.setCoordinates([i,y]);
                             }
                         }
                     }
@@ -59,6 +62,7 @@ class GameBoard {
                         if( j === x){
                             if((i >= y) && (i < (y + ship_length))){
                                 this.board[x][i].addShip();
+                                ship.setCoordinates([x,i]);
                             }
                         }
                     }
