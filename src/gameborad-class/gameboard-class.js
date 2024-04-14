@@ -16,13 +16,17 @@ class GameBoard {
     #checkUseability([x,y], ship_length, horizontal_direction){
 
         if(horizontal_direction){
-            for(let i = x; i < x+ ship_length; i++){
-                if(this.board[i][y].is_useable === false) return false;
+            for(let i = x; i < x + ship_length; i++){
+                if(this.board[i][y].is_useable == false){
+                    return false;
+                }
             }
             return true
             }  else {
-            for(let i = y; i < y +   ship_length; i++){
-                if(this.board[x][i].is_useable === false) return false;
+            for(let i = y; i < y + ship_length; i++){
+                if(this.board[x][i].is_useable == false) {
+                    return false;
+                }
             }  
             return true
             }
@@ -57,7 +61,7 @@ class GameBoard {
                 for(let j = x - 1; j <= x + 1; j++){
                     for(let i = y - 1; i < y + ship_length + 1; i++){
                         if((i >= 0) && (i <= 9) && (j >=0) && (j <= 9)){
-                            this.board[i][j].changeUseability();
+                            this.board[j][i].changeUseability();
                         }
                         if( j === x){
                             if((i >= y) && (i < (y + ship_length))){
