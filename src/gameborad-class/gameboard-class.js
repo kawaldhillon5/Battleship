@@ -32,12 +32,19 @@ class GameBoard {
             }
     }
 
-    #validateCoordinates([x,y],ship_length){
-        
-        if(((x > 9) || ( y > 9) || ((x + (ship_length -1)) > 9) || ( (y + (ship_length - 1)) > 9))){
-            return false;
+    #validateCoordinates([x,y],ship_length,horizontal_direction){
+        if(horizontal_direction === true){
+            if(((x > 9) || ( y > 9) || (x < 0) || (y < 0) || ((x + (ship_length -1)) > 9))){
+                return false;
+            } else {
+                return true;
+            }
         } else {
-            return true;
+            if(((x > 9) || ( y > 9) || (x < 0) || (y < 0) ||  ( (y + (ship_length - 1)) > 9))){
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -45,7 +52,7 @@ class GameBoard {
 
         const ship_length = ship.length;
 
-        if(!(this.#validateCoordinates([x,y],ship_length))){
+        if(!(this.#validateCoordinates([x,y],ship_length, horizontal_direction))){
             return false;
         }
 
@@ -61,6 +68,7 @@ class GameBoard {
                             if((i >= x) && (i < (x + ship_length))){
                                 this.board[i][y].addShip();
                                 ship.setCoordinates([i,y]);
+                                ship.is_horizontal = horizontal_direction;
                             }
                         }
                     }
@@ -76,6 +84,7 @@ class GameBoard {
                             if((i >= y) && (i < (y + ship_length))){
                                 this.board[x][i].addShip();
                                 ship.setCoordinates([x,i]);
+                                ship.is_horizontal = horizontal_direction;
                             }
                         }
                     }

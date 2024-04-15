@@ -4,6 +4,7 @@ class Ship {
         this.no_of_hits = 0;
         this.set_of_coordinates = [];
         this.is_sunk = false;
+        this.is_horizontal = true;
     }
 
     hit = function(){

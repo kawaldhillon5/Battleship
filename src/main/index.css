@@ -1,0 +1,124 @@
+@font-face {
+    font-family: myFont;
+    src: url(Poppins-Medium.ttf);
+}
+
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: myFont;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 12fr 0.5fr;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#title_div {
+
+    font-size: 34px;
+
+}
+
+#footer {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer>span{
+    font-style: italic;
+}
+
+a{
+    margin-left: 5px;
+    color: black;
+    text-decoration: none;
+}
+
+#content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 7fr;
+    justify-items: center;
+    align-items: center;
+}
+
+#player1Div,#player2Div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#board {
+    border: 1px solid rgba(0, 0, 0, 0.505);
+    min-width: 400px;
+    min-height: 400px;
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+}
+
+.gameboard_box{
+    min-width: 40px;
+    min-height: 40px;
+    border: 1px solid rgba(62, 192, 240, 0.242);
+}
+
+/* .contains_ship{
+    border: 1px solid rgb(223, 40, 40);
+} */
+
+.horizontal_first{
+    border-left: 1px solid red;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+}
+
+.horizontal_middle{
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+}
+
+.vertical_middle{
+    border-left: 1px solid red;
+    border-right: 1px solid red;
+}
+
+.horizontal_last{
+    border-right: 1px solid red;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+}
+
+.vertical_first{
+    border-left: 1px solid red;
+    border-top: 1px solid red;
+    border-right: 1px solid red;
+}
+
+.vertical_last{
+    border-left: 1px solid red;
+    border-bottom: 1px solid red;
+    border-right: 1px solid red;
+}
+
+.single_box_ship{
+    border-left: 1px solid red;
+    border-bottom: 1px solid red;
+    border-right: 1px solid red;
+    border-top: 1px solid red;
+}
+
