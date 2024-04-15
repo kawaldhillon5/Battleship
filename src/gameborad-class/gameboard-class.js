@@ -32,11 +32,20 @@ class GameBoard {
             }
     }
 
+    #validateCoordinates([x,y],ship_length){
+        
+        if(((x > 9) || ( y > 9) || ((x + (ship_length -1)) > 9) || ( (y + (ship_length - 1)) > 9))){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     placeShip = function([x,y], ship, horizontal_direction){
 
         const ship_length = ship.length;
 
-        if(((x > 9) || ( y > 9) || ((x + (ship_length -1)) > 9) || ( (y + (ship_length - 1)) > 9))){
+        if(!(this.#validateCoordinates([x,y],ship_length))){
             return false;
         }
 
@@ -75,6 +84,21 @@ class GameBoard {
             }
         } else {
             return false;
+        }
+    }
+
+    recieveAttack([x,y],ship_array){
+        if((x >= 0) && (x <= 9) && (y >=0) && (y <= 9)){
+            this.board[x][y].hit();
+            if(this.board[x][y].contains_ship){
+                ship_array.forEach(ship => {
+                    ship.set_of_coordinates.forEach(coordinates => {
+                        if((coordinates[0] === x) && (coordinates[1] === y)){
+                            ship.hit();
+                        }                    
+                    });
+                });
+            }
         }
     }
 

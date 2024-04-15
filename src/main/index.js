@@ -28,4 +28,4 @@ const gameSetUp = function(){
     console.log(ship_array);
 }
 
-gameSetUp();
+

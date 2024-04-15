@@ -3,17 +3,19 @@ class Ship {
         this.length = length;
         this.no_of_hits = 0;
         this.set_of_coordinates = [];
+        this.is_sunk = false;
     }
 
     hit = function(){
 
         if(this.no_of_hits < this.length){
             ++this.no_of_hits;
+            if(this.no_of_hits >= this.length){
+                this.is_sunk = true;
+            } else {
+                this.is_sunk = false;
+            }
         }
-    }
-
-    isSunk = function(){
-        return this.no_of_hits >= this.length ? true : false;
     }
 
     setCoordinates = function([x,y]){
