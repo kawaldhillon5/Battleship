@@ -66,6 +66,16 @@ function displayShips(ship_array){
     });
 }
 
+function displayAttack([x,y], gameboard){
+    const box = document.getElementById(`${x}${y}`);
+    box.classList.add("hit");
+        if(gameboard.board[x][y].contains_ship){
+            box.textContent = "✖";
+        } else {
+            box.textContent = "•";
+        }
+}
+
 function domContent(){
     const contentDiv = document.querySelector("#content");
     const player1Div = createElementDom("div","id","player1Div");
@@ -84,4 +94,4 @@ function domContent(){
     contentDiv.appendChild(player2Div);
 }
 
-export {domContent, displayGameboard, displayShips};
+export {domContent, displayGameboard, displayShips, displayAttack};

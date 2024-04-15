@@ -98,18 +98,22 @@ class GameBoard {
 
     recieveAttack([x,y],ship_array){
         if((x >= 0) && (x <= 9) && (y >=0) && (y <= 9)){
-            this.board[x][y].hit();
-            if(this.board[x][y].contains_ship){
-                ship_array.forEach(ship => {
-                    ship.set_of_coordinates.forEach(coordinates => {
-                        if((coordinates[0] === x) && (coordinates[1] === y)){
-                            ship.hit();
-                        }                    
+            if(!(this.board[x][y].is_hit)){
+                this.board[x][y].hit();
+                if(this.board[x][y].contains_ship){
+                    ship_array.forEach(ship => {
+                        ship.set_of_coordinates.forEach(coordinates => {
+                            if((coordinates[0] === x) && (coordinates[1] === y)){
+                                ship.hit();
+                            }
+                            return;                    
+                        });
                     });
-                });
+                }
             }
         }
-    }
+        return [x,y];
+    } 
 
 }
 

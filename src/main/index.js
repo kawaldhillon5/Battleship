@@ -2,7 +2,7 @@ import GameBoard from "../gameborad-class/gameboard-class";
 import { getRandomBoolean, getRandomInt } from "../random-number-generator/random-number-generator";
 import Ship from "../ship-class/ship_class";
 import "./index.css";
-import { domContent, displayGameboard, displayShips } from "../dom-functions/dom-function";
+import { domContent, displayGameboard, displayShips, displayAttack } from "../dom-functions/dom-function";
 const placeAllShips = function([x,y],ship,horizontal_direction, gameboard){
 
     while(!(gameboard.placeShip([x,y],ship,horizontal_direction))){
@@ -13,7 +13,7 @@ const placeAllShips = function([x,y],ship,horizontal_direction, gameboard){
                 }
             }
         }
-        return true;;
+        return;
     }
       
 }
@@ -27,6 +27,10 @@ const gameSetUp = function(){
     });
     const player1GameboardArray = displayGameboard(gameboard,"#player1Gameboard");
     displayShips(ship_array)
+    displayAttack(gameboard.recieveAttack([1,1], ship_array),gameboard);
+    displayAttack(gameboard.recieveAttack([1,2], ship_array),gameboard);
+    displayAttack(gameboard.recieveAttack([3,2], ship_array),gameboard);
+
     console.log(gameboard);
     console.log(ship_array);
 }
