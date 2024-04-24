@@ -71,7 +71,7 @@ a{
     min-width: 400px;
     min-height: 400px;
     display: grid;
-    gap: 2px;
+    gap: 1px;
     grid-template-columns: repeat(10, 40px);
     grid-template-rows: repeat(10, 40px);
 }
@@ -79,7 +79,7 @@ a{
 .gameboard_box{
     min-width: 40px;
     min-height: 40px;
-    border: 1px solid rgba(62, 192, 240, 0.242);
+    border: 2px solid rgba(62, 192, 240, 0.532);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,47 +88,48 @@ a{
 
 
 .horizontal_first{
-    border-left: 1px solid var(--ship_color);
-    border-top: 1px solid var(--ship_color);
-    border-bottom: 1px solid var(--ship_color);
+    border-left: 2px solid var(--ship_color);
+    border-top: 2px solid var(--ship_color);
+    border-bottom: 2px solid var(--ship_color);
 }
 
 .horizontal_middle{
-    border-top: 1px solid var(--ship_color);
-    border-bottom: 1px solid var(--ship_color);
+    border-top: 2px solid var(--ship_color);
+    border-bottom: 2px solid var(--ship_color);
 }
 
 .vertical_middle{
-    border-left: 1px solid var(--ship_color);
-    border-right: 1px solid var(--ship_color);
+    border-left: 2px solid var(--ship_color);
+    border-right: 2px solid var(--ship_color);
 }
 
 .horizontal_last{
-    border-right: 1px solid var(--ship_color);
-    border-top: 1px solid var(--ship_color);
-    border-bottom: 1px solid var(--ship_color);
+    border-right: 2px solid var(--ship_color);
+    border-top: 2px solid var(--ship_color);
+    border-bottom: 2px solid var(--ship_color);
 }
 
 .vertical_first{
-    border-left: 1px solid var(--ship_color);
-    border-top: 1px solid var(--ship_color);
-    border-right: 1px solid var(--ship_color);
+    border-left: 2px solid var(--ship_color);
+    border-top: 2px solid var(--ship_color);
+    border-right: 2px solid var(--ship_color);
 }
 
 .vertical_last{
-    border-left: 1px solid var(--ship_color);
-    border-bottom: 1px solid var(--ship_color);
-    border-right: 1px solid var(--ship_color);
+    border-left: 2px solid var(--ship_color);
+    border-bottom: 2px solid var(--ship_color);
+    border-right: 2px solid var(--ship_color);
 }
 
 .single_box_ship{
-    border-left: 1px solid var(--ship_color);
-    border-bottom: 1px solid var(--ship_color);
-    border-right: 1px solid var(--ship_color);
-    border-top: 1px solid var(--ship_color);
+    border-left: 2px solid var(--ship_color);
+    border-bottom: 2px solid var(--ship_color);
+    border-right: 2px solid var(--ship_color);
+    border-top: 2px solid var(--ship_color);
 }
 
 .hit{
+    border: 2px solid red;
     font-size: 27px;
     background-color: rgb(209, 209, 209);
 }

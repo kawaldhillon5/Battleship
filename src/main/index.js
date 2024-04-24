@@ -20,19 +20,28 @@ const placeAllShips = function([x,y],ship,horizontal_direction, gameboard){
 
 const gameSetUp = function(){
     domContent();
-    const ship_array = [new Ship(1), new Ship(1), new Ship(1), new Ship(1), new Ship(2), new Ship(2),new Ship(2), new Ship(3),new Ship(3), new Ship(4)];
-    const gameboard = new GameBoard();
-    ship_array.forEach(ship => {
-        placeAllShips([getRandomInt(),getRandomInt()],ship,getRandomBoolean(),gameboard)
-    });
-    const player1GameboardArray = displayGameboard(gameboard,"#player1Gameboard");
-    displayShips(ship_array)
-    displayAttack(gameboard.recieveAttack([1,1], ship_array),gameboard);
-    displayAttack(gameboard.recieveAttack([1,2], ship_array),gameboard);
-    displayAttack(gameboard.recieveAttack([3,2], ship_array),gameboard);
+    const ship_array1 = [new Ship(1), new Ship(1), new Ship(1), new Ship(1), new Ship(2), new Ship(2),new Ship(2), new Ship(3),new Ship(3), new Ship(4)];
+    const ship_array2 = [new Ship(1), new Ship(1), new Ship(1), new Ship(1), new Ship(2), new Ship(2),new Ship(2), new Ship(3),new Ship(3), new Ship(4)];
 
-    console.log(gameboard);
-    console.log(ship_array);
+    const gameboard1 = new GameBoard();
+    const gameboard2 = new GameBoard();
+
+    ship_array1.forEach(ship => {
+        placeAllShips([getRandomInt(),getRandomInt()],ship,getRandomBoolean(),gameboard1)
+    });
+    ship_array2.forEach(ship => {
+        placeAllShips([getRandomInt(),getRandomInt()],ship,getRandomBoolean(),gameboard2)
+    });
+    const player1GameboardArray = displayGameboard(gameboard1,"#player1Gameboard",0,false);
+    const player2GameboardArray = displayGameboard(gameboard2,"#player2Gameboard",1,true,gameboard2.recieveAttack,ship_array2);
+    displayShips(ship_array1,0);
+    displayShips(ship_array2,1)
+
+    displayAttack(gameboard1.recieveAttack([1,1], ship_array1),gameboard1,0);
+    // displayAttack(gameboard1.recieveAttack([0,0], ship_array2),gameboard2,1);
+
+    console.log(gameboard1);
+    console.log(ship_array1);
 }
 
 gameSetUp();

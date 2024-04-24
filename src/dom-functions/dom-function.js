@@ -14,16 +14,23 @@ function insertHtml(targetElm, Elms) {
     
 }
 
-function displayGameboard(gameboard, target){
+function displayGameboard(gameboard, target, player, clickableAttack, recieveAttack, ship_array){
     let gameboard_array = [];
     const targetDiv = document.querySelector(`${target}`);
     const playerBoard = createElementDom("div","id","board");
     gameboard.board.forEach(row => {
         row.forEach(element => {
-            const box = createElementDom("div","id",`${element.coordinates[0]}${element.coordinates[1]}`);
+            const box = createElementDom("div","id",`${element.coordinates[0]}${element.coordinates[1]}${player}`);
             box.classList.add("gameboard_box");
             if(element.contains_ship) box.classList.add("contains_ship");
             gameboard_array.push(box);
+            if(clickableAttack){
+                box.addEventListener("click",(e) => {
+                    const boxCoordinatesX = e.target.id.slice(1,2);
+                    const boxCoordinatesY = e.target.id.slice(0,1);
+                    displayAttack(gameboard.recieveAttack([Number(boxCoordinatesY),Number(boxCoordinatesX)],ship_array),gameboard,player);
+                });
+            }
             playerBoard.appendChild(box);
         });
     });
@@ -31,34 +38,34 @@ function displayGameboard(gameboard, target){
     return gameboard_array;
 }
 
-function displayShips(ship_array){
+function displayShips(ship_array,player){
     ship_array.forEach(ship => {
         for(let i = 0; i < ship.set_of_coordinates.length; i++){
             if(ship.length === 1){
                 const box_id = ship.set_of_coordinates[0];
-                document.getElementById(`${box_id[0]}${box_id[1]}`).classList.add("single_box_ship");
+                document.getElementById(`${box_id[0]}${box_id[1]}${player}`).classList.add("single_box_ship");
             } else {
                 if(!(ship.is_horizontal)){
                     if(i === 0){
                         const box_id = ship.set_of_coordinates[0];
-                        document.getElementById(`${box_id[0]}${box_id[1]}`).classList.add("horizontal_first");
+                        document.getElementById(`${box_id[0]}${box_id[1]}${player}`).classList.add("horizontal_first");
                     } else if((i > 0)&&(i < ship.set_of_coordinates.length - 1)){
                         const box_id = ship.set_of_coordinates[i];
-                        document.getElementById(`${box_id[0]}${box_id[1]}`).classList.add("horizontal_middle");
+                        document.getElementById(`${box_id[0]}${box_id[1]}${player}`).classList.add("horizontal_middle");
                     } else if(i === ship.set_of_coordinates.length - 1){
                         const box_id = ship.set_of_coordinates[i];
-                        document.getElementById(`${box_id[0]}${box_id[1]}`).classList.add("horizontal_last");
+                        document.getElementById(`${box_id[0]}${box_id[1]}${player}`).classList.add("horizontal_last");
                     }
                 } else {
                     if(i === 0){
                         const box_id = ship.set_of_coordinates[0];
-                        document.getElementById(`${box_id[0]}${box_id[1]}`).classList.add("vertical_first");
+                        document.getElementById(`${box_id[0]}${box_id[1]}${player}`).classList.add("vertical_first");
                     } else if((i > 0)&&(i < ship.set_of_coordinates.length - 1)){
                         const box_id = ship.set_of_coordinates[i];
-                        document.getElementById(`${box_id[0]}${box_id[1]}`).classList.add("vertical_middle");
+                        document.getElementById(`${box_id[0]}${box_id[1]}${player}`).classList.add("vertical_middle");
                     } else if(i === ship.set_of_coordinates.length - 1){
                         const box_id = ship.set_of_coordinates[i];
-                        document.getElementById(`${box_id[0]}${box_id[1]}`).classList.add("vertical_last");
+                        document.getElementById(`${box_id[0]}${box_id[1]}${player}`).classList.add("vertical_last");
                     }
                 }
             }
@@ -66,8 +73,8 @@ function displayShips(ship_array){
     });
 }
 
-function displayAttack([x,y], gameboard){
-    const box = document.getElementById(`${x}${y}`);
+function displayAttack([x,y], gameboard,player){
+    const box = document.getElementById(`${x}${y}${player}`);
     box.classList.add("hit");
         if(gameboard.board[x][y].contains_ship){
             box.textContent = "✖";
