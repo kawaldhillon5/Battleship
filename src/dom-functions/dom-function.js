@@ -1,4 +1,4 @@
-
+import game from "../gameLoop/gameloop-function";
 const createElementDom = function (type, attribute, attributeName){
 
     const elmnt = document.createElement(type);
@@ -14,7 +14,7 @@ function insertHtml(targetElm, Elms) {
     
 }
 
-function displayGameboard(gameboard, target, player, clickableAttack, recieveAttack, ship_array){
+function displayGameboard(gameboard, target, player, otherPlayer, clickableAttack, Player1,Player2){
     let gameboard_array = [];
     const targetDiv = document.querySelector(`${target}`);
     const playerBoard = createElementDom("div","id","board");
@@ -24,11 +24,9 @@ function displayGameboard(gameboard, target, player, clickableAttack, recieveAtt
             box.classList.add("gameboard_box","not_contains_ship");
             if(element.contains_ship) box.classList.add("contains_ship");
             gameboard_array.push(box);
-            if(clickableAttack){
+            if(clickableAttack){ 
                 box.addEventListener("click",(e) => {
-                    const boxCoordinatesX = e.target.id.slice(1,2);
-                    const boxCoordinatesY = e.target.id.slice(0,1);
-                    displayAttack(gameboard.recieveAttack([Number(boxCoordinatesY),Number(boxCoordinatesX)],ship_array),gameboard,player);
+                    game(e.target.id.slice(1,2),e.target.id.slice(0,1),gameboard,player,otherPlayer,Player1,Player2)
                 });
             }
             playerBoard.appendChild(box);
@@ -76,6 +74,7 @@ function displayShips(ship_array,player){
 function displayAttack([x,y], gameboard,player){
     const box = document.getElementById(`${x}${y}${player}`);
     box.classList.add("hit");
+    box.classList.add("inactiveBox");
         if(gameboard.board[x][y].contains_ship){
             box.textContent = "✖";
             return true;
@@ -95,9 +94,9 @@ function domContent(){
     const player2Name = createElementDom("p","class","playerName");
     player2Name.textContent = "Player 2";
     player2Div.appendChild(player2Name);
-    const player1Gameboard = createElementDom("div","id","player1Gameboard");
+    const player1Gameboard = createElementDom("div","id","player0Gameboard");
     player1Div.appendChild(player1Gameboard);
-    const player2Gameboard = createElementDom("div","id","player2Gameboard");
+    const player2Gameboard = createElementDom("div","id","player1Gameboard");
     player2Div.appendChild(player2Gameboard);
     contentDiv.appendChild(player1Div);
     contentDiv.appendChild(player2Div);

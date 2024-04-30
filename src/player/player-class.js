@@ -1,21 +1,24 @@
 import Ship from "../ship-class/ship_class";
 import GameBoard from "../gameborad-class/gameboard-class";
 import { getRandomBoolean, getRandomInt } from "../random-number-generator/random-number-generator";
+
 class player{
 
-    constructor(){
+    constructor(name){
+        this.name = `${name}`;
         this.shipArray = [new Ship(1), new Ship(1), new Ship(1), new Ship(1), new Ship(2), new Ship(2),new Ship(2), new Ship(3),new Ship(3), new Ship(4)];
         this.gameboard = new GameBoard();
         this.gameboardArray = [];
     }
 
-    playerWon(){
+    playerLost(){
+        let n = 0
         this.shipArray.forEach(ship => {
-            if(ship.is_sunk === false){
-                return false
+            if(ship.is_sunk === true){
+                ++n;
             }
         });
-        return true;
+        return n;
     }
 
     placeShips(){

@@ -81,9 +81,22 @@ a{
     grid-template-rows: repeat(10, 40px);
 }
 
-#inactiveGameboard{
+.gameWon{
+    border: 5px solid green;
+}
+
+.gameLost{
+    border: 5px solid red;
+}
+
+.inactiveGameboard{
     pointer-events: none;
     filter: blur(2px);
+}
+
+.inactiveBox{
+    pointer-events: none;
+
 }
 
 .gameboard_box{
