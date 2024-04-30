@@ -21,7 +21,7 @@ function displayGameboard(gameboard, target, player, clickableAttack, recieveAtt
     gameboard.board.forEach(row => {
         row.forEach(element => {
             const box = createElementDom("div","id",`${element.coordinates[0]}${element.coordinates[1]}${player}`);
-            box.classList.add("gameboard_box");
+            box.classList.add("gameboard_box","not_contains_ship");
             if(element.contains_ship) box.classList.add("contains_ship");
             gameboard_array.push(box);
             if(clickableAttack){
@@ -78,8 +78,10 @@ function displayAttack([x,y], gameboard,player){
     box.classList.add("hit");
         if(gameboard.board[x][y].contains_ship){
             box.textContent = "✖";
+            return true;
         } else {
             box.textContent = "•";
+            return false;
         }
 }
 
