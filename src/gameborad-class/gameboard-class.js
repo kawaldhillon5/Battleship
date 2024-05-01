@@ -49,6 +49,8 @@ class GameBoard {
     }
 
     placeShip = function([x,y], ship, horizontal_direction){
+        
+        // accidently inverted X and Y
 
         const ship_length = ship.length;
 

@@ -71,12 +71,60 @@ function displayShips(ship_array,player){
     });
 }
 
-function displayAttack([x,y], gameboard,player){
+function displayAttack([x,y], gameboard,player, Player1, Player2){
+    const vertices = [[-1,-1],[-1,1],[1,-1],[1,1]];
+    let shipArray = []
+    if(player === 0){
+        shipArray = Player1.shipArray;
+    } else {
+        shipArray = Player2.shipArray;
+    }
     const box = document.getElementById(`${x}${y}${player}`);
     box.classList.add("hit");
     box.classList.add("inactiveBox");
         if(gameboard.board[x][y].contains_ship){
             box.textContent = "✖";
+            vertices.forEach(vertex => {
+                const vertexX = x + vertex[0];
+                const vertexY = y + vertex[1];
+                if((vertexX >= 0) && (vertexX <= 9) && (vertexY >= 0) && (vertexY <= 9)) {
+                    const not_attackable_box = document.getElementById(`${vertexX}${vertexY}${player}`);
+                    if(!(not_attackable_box.classList.contains("inactiveBox"))){
+                        not_attackable_box.classList.add("not_attackable");
+                    }
+                }
+            });
+            shipArray.forEach(ship => {
+                ship.set_of_coordinates.forEach(coordinates =>{
+                    if((coordinates[0] === x) && (coordinates[1] === y)){
+                        if(ship.is_sunk){
+                            if(!(ship.is_horizontal)){
+                                const coordinate0X = ship.set_of_coordinates[0][0];
+                                const coordinate0Y = ship.set_of_coordinates[0][1] - 1;
+                                const coordinate1X = ship.set_of_coordinates[ship.set_of_coordinates.length -1][0];
+                                const coordinate1Y = ship.set_of_coordinates[ship.set_of_coordinates.length -1][1] + 1;
+                                if((coordinate0X <= 9 ) && (coordinate0X >= 0) && (coordinate0Y >= 0) && (coordinate0Y <= 9)){
+                                    document.getElementById(`${coordinate0X}${coordinate0Y}${player}`).classList.add("not_attackable");
+                                }
+                                if((coordinate1X <= 9 ) && (coordinate1X >= 0) && (coordinate1Y >= 0) && (coordinate1Y <= 9)){
+                                    document.getElementById(`${coordinate1X}${coordinate1Y}${player}`).classList.add("not_attackable");
+                                }
+                            } else {
+                                const coordinate0X = ship.set_of_coordinates[0][0] - 1 ;
+                                const coordinate0Y = ship.set_of_coordinates[0][1];
+                                const coordinate1X = ship.set_of_coordinates[ship.set_of_coordinates.length -1][0] + 1;
+                                const coordinate1Y = ship.set_of_coordinates[ship.set_of_coordinates.length -1][1];
+                                if((coordinate0X <= 9 ) && (coordinate0X >= 0) && (coordinate0Y >= 0) && (coordinate0Y <= 9)){
+                                    document.getElementById(`${coordinate0X}${coordinate0Y}${player}`).classList.add("not_attackable");
+                                }
+                                if((coordinate1X <= 9 ) && (coordinate1X >= 0) && (coordinate1Y >= 0) && (coordinate1Y <= 9)){
+                                    document.getElementById(`${coordinate1X}${coordinate1Y}${player}`).classList.add("not_attackable");
+                                }
+                            }
+                        }
+                    }
+                });
+            });
             return true;
         } else {
             box.textContent = "•";

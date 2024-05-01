@@ -99,6 +99,11 @@ a{
 
 }
 
+.not_attackable {
+    background-color: rgb(218, 219, 219);
+    pointer-events: none;
+}
+
 .gameboard_box{
     min-width: 40px;
     min-height: 40px;
@@ -108,7 +113,7 @@ a{
 }
 
 .not_contains_ship{
-    border: 2px solid rgba(62, 192, 240, 0.532);
+    border: 1px solid rgba(62, 192, 240, 0.532);
 }
 
 
@@ -155,7 +160,7 @@ a{
 }
 
 .hit{
-    border: 2px solid red;
+    border: 2px solid rgba(62, 192, 240, 0.532);
     font-size: 27px;
     background-color: rgb(209, 209, 209);
 }
